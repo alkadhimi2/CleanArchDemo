@@ -14,6 +14,7 @@ using CleacArch.Mvc.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using CleanArch.Infra.Data.Context;
+using CleanArch.Infra.Ioc;
 
 namespace CleacArch.Mvc
 {
@@ -49,6 +50,7 @@ namespace CleacArch.Mvc
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -78,6 +80,11 @@ namespace CleacArch.Mvc
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+        }
+        private static void RegisterServices(IServiceCollection services)
+        {
+            DependencyContainer.RegiserServices(services);
         }
     }
 }
